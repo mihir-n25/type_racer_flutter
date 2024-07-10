@@ -9,31 +9,36 @@ class HomeScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [const Text("Create/Join a room to play" , style: TextStyle(
-            fontSize: 24,
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(
+            maxWidth: 600
           ),
-          ),
-          SizedBox(
-            height: size.height * 0.1
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [const Text("Create/Join a room to play" , style: TextStyle(
+              fontSize: 24,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CustomButton(
-                text: "Create", 
-                onTap: () => {}, 
-                isHome: true
-                ),
-                CustomButton(
-                text: "Join", 
-                onTap: () => {}, 
-                isHome: true
-                )
-              ],
-            )
-          ],
+            ),
+            SizedBox(
+              height: size.height * 0.1
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  CustomButton(
+                  text: "Create", 
+                  onTap: () => Navigator.pushNamed(context, '/create-room'), 
+                  isHome: true
+                  ),
+                  CustomButton(
+                  text: "Join", 
+                  onTap: () => Navigator.pushNamed(context, '/join-room'), 
+                  isHome: true
+                  )
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
