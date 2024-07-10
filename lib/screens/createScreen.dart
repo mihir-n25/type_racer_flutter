@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:type_racer/widgets/customButton.dart';
 import 'package:type_racer/widgets/customTextField.dart';
 
 class CreateRoomScreen extends StatefulWidget {
@@ -26,6 +27,7 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
           maxWidth: 600,
       ),
       child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -33,7 +35,12 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
             const Text("Create Room" , style: TextStyle(fontSize: 30),
             ),
             SizedBox(height: size.height * 0.08,),
-            CustomTextField(controller: _nameController, hintText: "Enter Your Nickname",)
+            CustomTextField(controller: _nameController, hintText: "Enter Your Nickname"
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            CustomButton(text: "Create", onTap: () {})
           ],
         ),
       ),
