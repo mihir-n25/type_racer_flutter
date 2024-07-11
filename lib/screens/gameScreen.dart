@@ -18,6 +18,7 @@ class _GameScreenState extends State<GameScreen> {
   void initState() {
     super.initState();
     _socketMethods.updateTimer(context);
+    _socketMethods.updateGame(context);
   }
 
   @override
@@ -28,13 +29,22 @@ class _GameScreenState extends State<GameScreen> {
       body: SafeArea(
         child: Center(
           child: Column(
-            children: [ 
+            children: [
+              Chip(
+                label: Text(
+                  clientStateProvider.clientState['timer']['msg'].toString(),
+                  style: const TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+              ),
               Text(
-              clientStateProvider.clientState['timer']['msg'].toString(), style: const TextStyle(fontSize: 16),
-            ),
-              Text(
-              clientStateProvider.clientState['timer']['countDown'].toString(), style: const TextStyle(fontSize: 30 , fontWeight: FontWeight.bold),
-            )
+                clientStateProvider.clientState['timer']['countDown'].toString(),
+                style: const TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ],
             ),
         ),

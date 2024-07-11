@@ -41,7 +41,7 @@ class _GameTextFieldState extends State<GameTextField> {
     final gameData = Provider.of<GameStateProvider>(context);
     return CustomButton(
       text: "START",
-      onTap: () {},
+      onTap: () => handleStart(gameData),
     );
   }
 }

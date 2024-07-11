@@ -63,4 +63,21 @@ class SocketMethods {
     clientStateProvider.setClientState(data);
   });
   }
+
+  updateGame(BuildContext context){
+    _socketClient.on('updateGame', (data) {
+      final gameStateProvider = Provider.of<GameStateProvider>(context , listen : false)
+          .updateGameState(
+              id: data['_id'],
+              players: data['players'],
+              isJoin: data['isJoin'],
+              isOver: data['isOver'],
+              words: data['words']);
+
+              if(data['._id'].isNotEmpty && !_isPlaying){
+                Navigator.pushNamed(context, '/game-screen');
+                _isPlaying = true;
+              }
+  });
+  }
 }
