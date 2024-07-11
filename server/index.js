@@ -24,14 +24,13 @@ mongoose
   });
 
 io.on("connection", (socket) => {
-
   socket.on("create-game", async ({ nickname }) => {
     try {
       let game = new Game();
       const sentence = await getSentence();
       game.words = sentence;
       let player = {
-        socketID: socket.id,
+        socketId: socket.id,
         nickname,
         isPartyLeader: true,
       };
@@ -41,9 +40,35 @@ io.on("connection", (socket) => {
       const gameId = game._id.toString();
       socket.join(gameId);
 
-      io.to(gameId).emit('updateGame' , game);
+      io.to(gameId).emit("updateGame", game);
     } catch (err) {
       console.log(err);
+    }
+  });
+
+  //join-game
+  socket.on("join-game", async ({ nickname, gameId }) => {
+    try {
+      if (!gameId.match(/^[0-9a-fA-F]{24}$/)) {
+        socket.emit("notCorrectGame", "Please enter a valid game ID");
+        return;
+      }
+      let game = await Game.findById(gameId);
+      if (game.isJoin) {
+        const id = game._id.toString();
+        let player = {
+          nickname,
+          socketId: socket.id,
+        };
+        socket.join(id);
+        game.players.push(player);
+        game = await game.save();
+        io.to(gameId).emit("updateGame", game);
+      } else{
+        socket.emit('notCorrectGame' , 'The game is in process, please try again later!')
+      }
+    } catch (error) {
+      console.log(error);
     }
   });
 });

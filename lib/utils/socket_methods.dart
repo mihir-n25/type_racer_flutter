@@ -15,6 +15,16 @@ class SocketMethods {
     }
   }
 
+  // join game
+  joinGame(String gameId , String nickname) {
+    if (nickname.isNotEmpty && gameId.isNotEmpty) {
+      _socketClient.emit('join-game', {
+        'nickname': nickname,
+        'gameId' : gameId
+      });
+    }
+  }
+
   updateGameListener(BuildContext context) {
     _socketClient.on('updateGame', (data) {
       final gameStateProvider = Provider.of<GameStateProvider>(context , listen : false)
