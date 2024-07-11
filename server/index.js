@@ -37,6 +37,11 @@ io.on("connection", (socket) => {
       };
       game.players.push(player);
       game = await game.save();
+
+      const gameId = game._id.toString();
+      socket.join(gameId);
+
+      io.to(gameId).emit('updateGame' , game);
     } catch (err) {
       console.log(err);
     }

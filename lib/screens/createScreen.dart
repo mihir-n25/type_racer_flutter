@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:type_racer/utils/socket_client.dart';
 import 'package:type_racer/utils/socket_methods.dart';
 import 'package:type_racer/widgets/customButton.dart';
 import 'package:type_racer/widgets/customTextField.dart';
@@ -14,6 +13,12 @@ class CreateRoomScreen extends StatefulWidget {
 class _CreateRoomScreenState extends State<CreateRoomScreen> {
   final TextEditingController _nameController = TextEditingController();
   final SocketMethods _socketMethods = SocketMethods();
+
+  @override
+  void initState() {
+    super.initState();
+    _socketMethods.updateGameListener(context);
+  }
 
   @override
   void dispose() {

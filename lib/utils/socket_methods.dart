@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:type_racer/utils/socket_client.dart';
 
 class SocketMethods{
@@ -10,5 +11,11 @@ class SocketMethods{
         'nickname' : nickname,
       });
     }
+  }
+
+  updateGameListener(BuildContext context){
+    _socketClient.on('updateGame' , (data) {
+      
+    });
   }
   }
