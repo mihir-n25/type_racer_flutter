@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:type_racer/providers/client_state_provider.dart';
 import 'package:type_racer/providers/game_state_provider.dart';
 import 'package:type_racer/screens/createScreen.dart';
 import 'package:type_racer/screens/gameScreen.dart';
@@ -17,15 +18,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (context) => GameStateProvider())
+        ChangeNotifierProvider(create: (context) => GameStateProvider()),
+        ChangeNotifierProvider(create: (context) => ClientStateProvider())
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'TypeRacer',
           theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
+            primarySwatch: Colors.blue,
           ),
           initialRoute: "/",
           routes: {

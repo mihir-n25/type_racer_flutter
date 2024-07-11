@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:type_racer/providers/client_state_provider.dart';
 import 'package:type_racer/providers/game_state_provider.dart';
 import 'package:type_racer/utils/socket_client.dart';
 
@@ -41,11 +42,25 @@ class SocketMethods {
     });
   }
 
+  startTimer(playerId , gameId){
+    _socketClient.emit('timer' , {
+      'playerId' : playerId,
+      'gameId' : gameId
+    });
+  }
+
   notCorrectGameListner(BuildContext context){
     _socketClient.on('notCorrectGame' , (data) => 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(data))
     ),
     );
+  }
+
+  updateTimer(BuildContext context){
+    final clientStateProvider = Provider.of<ClientStateProvider>(context , listen: false);
+    _socketClient.on('timer' , (data){
+    clientStateProvider.setClientState(data);
+  });
   }
 }

@@ -16,7 +16,7 @@ const gameSchema = new mongoose.Schema({
         type : Boolean,
         default : false,
     },
-    start : {
+    startTime : {
         type : Number,
     }
 });
