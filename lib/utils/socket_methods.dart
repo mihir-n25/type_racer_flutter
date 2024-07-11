@@ -40,4 +40,12 @@ class SocketMethods {
               }
     });
   }
+
+  notCorrectGameListner(BuildContext context){
+    _socketClient.on('notCorrectGame' , (data) => 
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(data))
+    ),
+    );
+  }
 }

@@ -19,6 +19,7 @@ class _JoinRoomScreenState extends State<JoinRoomScreen> {
   void initState() {
     super.initState();
     _socketMethods.updateGameListener(context);
+    _socketMethods.notCorrectGameListner(context);
   }
 
   @override
