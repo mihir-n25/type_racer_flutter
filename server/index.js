@@ -65,6 +65,23 @@ io.on("connection", (socket) => {
     }
   });
 
+  socket.on('userInput' , async({userInput, gameId}) => {
+    let game = await Game.findById(gameId);
+    if(!game.isJoin && !game.isOver){
+      let player = game.players.find(
+        (playerr) => playerr.socketId === socket.id
+      );
+      if(game.words[player.currentWordIndex] === userInput.trim()){
+        player.currentWordIndex = player.currentWordIndex + 1;
+        if(player.currentWordIndex !== game.words.length){
+          game = await game.save();
+          io.to(gameId).emit("updateGame" , game);
+        }
+
+      }
+    }
+  })
+
  
 
   //timer listener

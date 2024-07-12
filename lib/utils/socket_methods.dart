@@ -27,6 +27,13 @@ class SocketMethods {
     }
   }
 
+  sendUserInput(String value , String gameId){
+    _socketClient.emit('userInput' , {
+      'userInput' : value,
+      'gameId' : gameId,
+    });
+  }
+
   updateGameListener(BuildContext context) {
     _socketClient.on('updateGame', (data) {
       final gameStateProvider = Provider.of<GameStateProvider>(context , listen : false)

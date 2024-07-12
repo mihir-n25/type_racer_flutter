@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
+// import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:type_racer/providers/client_state_provider.dart';
 import 'package:type_racer/providers/game_state_provider.dart';
 import 'package:type_racer/utils/socket_methods.dart';
 import 'package:type_racer/widgets/game_text_field.dart';
+import 'package:type_racer/widgets/sentence_game.dart';
 
 class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
@@ -47,6 +48,7 @@ class _GameScreenState extends State<GameScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              const  SentenceGame(),
 
               game.gameState['isJoin'] ? ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 600),
