@@ -18,6 +18,8 @@ class _GameTextFieldState extends State<GameTextField> {
   bool isBtn = true;
   late GameStateProvider? game;
 
+  final TextEditingController _wordsController = TextEditingController();
+
 @override
   void initState(){
     super.initState();
@@ -47,8 +49,24 @@ class _GameTextFieldState extends State<GameTextField> {
     playerMe['isPartyLeader'] && isBtn ? CustomButton(
       text: "START",
       onTap: () => handleStart(gameData),
-    ) :  Container(
-      child: Text('It is a text field'),
+    ) :  TextFormField(
+      readOnly: gameData.gameState['isJoin'],
+       controller : _wordsController,
+       onChanged: (val) {},
+       decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(color: Colors.transparent),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(color: Colors.transparent),
+        ),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16 , vertical: 14),
+        fillColor: const Color(0xffF5F5FA),
+        hintText: "Type here..",
+        hintStyle: const TextStyle(fontSize: 14,fontWeight: FontWeight.w400)
+       ),
     );
   }
 }
