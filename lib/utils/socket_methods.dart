@@ -6,6 +6,7 @@ import 'package:type_racer/utils/socket_client.dart';
 
 class SocketMethods {
   final _socketClient = SocketClient.instance.socket!;
+  bool _isPlaying = false;
 
   // create game
   createGame(String nickname) {
@@ -36,8 +37,10 @@ class SocketMethods {
               isOver: data['isOver'],
               words: data['words']);
 
-              if(data['_id'].isNotEmpty){
+             
+              if(data['_id'].isNotEmpty && !_isPlaying){
                 Navigator.pushNamed(context, '/game-screen');
+                _isPlaying = true;
               }
     });
   }
@@ -73,11 +76,6 @@ class SocketMethods {
               isJoin: data['isJoin'],
               isOver: data['isOver'],
               words: data['words']);
-
-              if(data['._id'].isNotEmpty && !_isPlaying){
-                Navigator.pushNamed(context, '/game-screen');
-                _isPlaying = true;
-              }
   });
   }
 }

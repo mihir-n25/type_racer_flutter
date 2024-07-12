@@ -15,6 +15,7 @@ class GameTextField extends StatefulWidget {
 class _GameTextFieldState extends State<GameTextField> {
   final SocketMethods _socketMethods = SocketMethods();
   var playerMe =  null;
+  bool isBtn = true;
   late GameStateProvider? game;
 
 @override
@@ -34,14 +35,20 @@ class _GameTextFieldState extends State<GameTextField> {
   
   handleStart(GameStateProvider game){
     _socketMethods.startTimer(playerMe['_id'], game.gameState['id']);
+    setState(() {
+      isBtn = false;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final gameData = Provider.of<GameStateProvider>(context);
-    return CustomButton(
+    return 
+    playerMe['isPartyLeader'] && isBtn ? CustomButton(
       text: "START",
       onTap: () => handleStart(gameData),
+    ) :  Container(
+      child: Text('It is a text field'),
     );
   }
 }
