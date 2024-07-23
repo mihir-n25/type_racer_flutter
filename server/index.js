@@ -118,6 +118,7 @@ io.on("connection", (socket) => {
       }, 1000);
     }
   });
+  console.log("socket done")
 });
 
 const startGameClock = async (gameID) => {
